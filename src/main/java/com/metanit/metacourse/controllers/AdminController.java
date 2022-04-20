@@ -1,5 +1,7 @@
 package com.metanit.metacourse.controllers;
 
+import com.metanit.metacourse.services.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin")
 @Slf4j
+@RequiredArgsConstructor
 public class AdminController {
-    @GetMapping("/me")
-    public ResponseEntity<?> index(){
-        log.info("hello");
-        return new ResponseEntity<>("Email is already taken!", HttpStatus.OK);
+    private final UserService userService;
+
+    @GetMapping("/api/users")
+    public ResponseEntity<?> index() {
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 }

@@ -15,6 +15,7 @@ import java.util.Date;
 
 @SpringBootApplication
 public class MetacourseApplication {
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -31,6 +32,7 @@ public class MetacourseApplication {
             userService.saveUser(new Person(null, "Bakhytzhan", "Amanzholov", "amanzholovbakhytzhan@gmail.com",
                     new Date(), "password23A", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
             userService.addRoleToUser("amanzholovbakhytzhan@gmail.com", "ROLE_USER");
+            userService.addRoleToUser("amanzholovbakhytzhan@gmail.com", "ROLE_ADMIN");
         };
     }
 }
