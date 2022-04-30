@@ -1,5 +1,6 @@
 package com.metanit.metacourse.services;
 
+import com.metanit.metacourse.models.Course;
 import com.metanit.metacourse.models.Person;
 import com.metanit.metacourse.models.Role;
 
@@ -14,4 +15,5 @@ public interface UserService {
     Person getUser(Long id);
     void deleteUser(Long id);
     Person update(Long id, Person person);
+    void addCourseToUser(Course course, Person person);
 }

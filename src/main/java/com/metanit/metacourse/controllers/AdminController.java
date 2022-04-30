@@ -1,5 +1,6 @@
 package com.metanit.metacourse.controllers;
 
+import com.metanit.metacourse.services.CourseService;
 import com.metanit.metacourse.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService userService;
+    private final CourseService courseService;
 
     @GetMapping("/api/users")
-    public ResponseEntity<?> index() {
+    public ResponseEntity<?> listOfUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+    }
+    @GetMapping("/api/courses")
+    public ResponseEntity<?> listOfCourses() {
+        return new ResponseEntity<>(courseService.getCourses(), HttpStatus.OK);
     }
 }

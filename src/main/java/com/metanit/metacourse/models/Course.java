@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,6 +20,8 @@ public class Course {
     private String title;
     private String description;
     private String duration;
+    @ManyToMany
+    private List<Category> categories;
     private double rating;
     @OneToMany
     private Collection<Module> modules = new ArrayList<>();

@@ -95,6 +95,11 @@ public class UserImplementation implements UserService, UserDetailsService {
     }
 
     @Override
+    public void addCourseToUser(Course course, Person person) {
+        person.getCoursesCreated().add(course);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Person user = userRepository.findByEmail(email);
         if (user == null) {
