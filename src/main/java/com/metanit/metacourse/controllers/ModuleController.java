@@ -36,4 +36,9 @@ public class ModuleController {
         moduleService.update(id, module);
         return new ResponseEntity<>("Module edit successfully", HttpStatus.OK);
     }
+
+    @GetMapping("/api/{id}")
+    public ResponseEntity<Module> getModule(@PathVariable Long id){
+        return ResponseEntity.ok(moduleService.getModule(id));
+    }
 }

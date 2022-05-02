@@ -38,4 +38,9 @@ public class LessonController {
         lessonService.update(id, lesson);
         return new ResponseEntity<>("Lesson edit successfully", HttpStatus.OK);
     }
+
+    @GetMapping("/api/{id}")
+    public ResponseEntity<Lesson> getLesson(@PathVariable Long id) {
+        return ResponseEntity.ok(lessonService.getLesson(id));
+    }
 }

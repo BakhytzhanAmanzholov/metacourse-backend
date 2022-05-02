@@ -1,5 +1,6 @@
 package com.metanit.metacourse.repositories;
 
+import com.metanit.metacourse.models.Category;
 import com.metanit.metacourse.models.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,5 +12,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Optional<Course> findById(Long id);
 
-    List<Course> findAll();
+    List<Course> findAllByCategoriesIn(List<Category> categories);
+
+
 }

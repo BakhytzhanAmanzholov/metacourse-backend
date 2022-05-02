@@ -1,6 +1,6 @@
 package com.metanit.metacourse.filters;
 
-import com.metanit.metacourse.services.UserImplementation;
+import com.metanit.metacourse.services.implementation.UserImplementation;
 import com.metanit.metacourse.token.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

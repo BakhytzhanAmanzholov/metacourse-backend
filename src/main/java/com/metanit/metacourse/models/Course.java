@@ -21,7 +21,7 @@ public class Course {
     private String description;
     private String duration;
     @ManyToMany
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
     private double rating;
     @OneToMany
     private Collection<Module> modules = new ArrayList<>();

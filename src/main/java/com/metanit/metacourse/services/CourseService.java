@@ -1,5 +1,6 @@
 package com.metanit.metacourse.services;
 
+import com.metanit.metacourse.models.Category;
 import com.metanit.metacourse.models.Course;
 import com.metanit.metacourse.models.Module;
 
@@ -13,4 +14,7 @@ public interface CourseService {
     void deleteCourse(Long id);
     Course update(Long id, Course course);
     void addModuleToCourse(Module module, Course course);
+    void addCategoryToCourse(Category category, Course course);
+
+    List<Course> findAllByCategories(List<Category> categories);
 }

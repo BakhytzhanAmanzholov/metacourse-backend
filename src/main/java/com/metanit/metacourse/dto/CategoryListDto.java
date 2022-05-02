@@ -5,9 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CourseDto {
-    private String title;
-    private String description;
-    private String duration;
+public class CategoryListDto {
     private List<String> categories;
 }

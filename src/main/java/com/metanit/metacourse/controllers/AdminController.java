@@ -22,6 +22,7 @@ public class AdminController {
     public ResponseEntity<?> listOfUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
+
     @GetMapping("/api/courses")
     public ResponseEntity<?> listOfCourses() {
         return new ResponseEntity<>(courseService.getCourses(), HttpStatus.OK);
