@@ -15,5 +15,7 @@ public interface UserService {
     Person getUser(Long id);
     void deleteUser(Long id);
     Person update(Long id, Person person);
-    void addCourseToUser(Course course, Person person);
+    void addCourseCreateToUser(Course course, Person person);
+    void addCourseTakenToUser(Course course, Person person);
+    void completeCourse(Course course, Person person);
 }

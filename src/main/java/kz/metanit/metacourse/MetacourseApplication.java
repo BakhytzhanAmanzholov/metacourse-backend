@@ -21,7 +21,7 @@ import java.util.List;
 public class MetacourseApplication {
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -36,7 +36,8 @@ public class MetacourseApplication {
             userService.saveRole(new Role(null, "ROLE_TEACHER"));
             userService.saveRole(new Role(null, "ROLE_ADMIN"));
             userService.saveUser(new Person(null, "Bakhytzhan", "Amanzholov", "amanzholovbakhytzhan@gmail.com",
-                    new Date(), "password23A", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+                    new Date(), "password23A",
+                    new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
             userService.addRoleToUser("amanzholovbakhytzhan@gmail.com", "ROLE_USER");
             userService.addRoleToUser("amanzholovbakhytzhan@gmail.com", "ROLE_ADMIN");
 
@@ -57,11 +58,11 @@ public class MetacourseApplication {
 
 
             Course course1 = new Course(null, "Programming", "Programming", "4-5 hours",
-                    categoryList1, 0.0, new ArrayList<>());
+                    categoryList1, 0.0, 0, new ArrayList<>());
             Course course2 = new Course(null, "Language", "Language", "4-5 hours",
-                    categoryList3, 0.0, new ArrayList<>());
+                    categoryList3, 0.0, 0, new ArrayList<>());
             Course course3 = new Course(null, "Category", "Category", "4-5 hours",
-                    categoryList2, 0.0, new ArrayList<>());
+                    categoryList2, 0.0, 0, new ArrayList<>());
 
             courseService.saveCourse(course1);
             courseService.saveCourse(course2);

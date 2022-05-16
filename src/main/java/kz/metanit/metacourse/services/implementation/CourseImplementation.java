@@ -3,6 +3,7 @@ package kz.metanit.metacourse.services.implementation;
 import kz.metanit.metacourse.models.Category;
 import kz.metanit.metacourse.models.Course;
 import kz.metanit.metacourse.models.Module;
+import kz.metanit.metacourse.models.Person;
 import kz.metanit.metacourse.repositories.CourseRepository;
 import kz.metanit.metacourse.services.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,9 +56,8 @@ public class CourseImplementation implements CourseService {
         Optional<Course> course = courseRepository.findById(id);
         try {
             courseRepository.delete(course.get());
-        }
-        catch (NoSuchElementException e){
-            throw  new IllegalArgumentException(e);
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -82,6 +81,33 @@ public class CourseImplementation implements CourseService {
     @Override
     public List<Course> findAllByCategories(List<Category> categories) {
         log.info("Get course by categories: \n {} ", new ArrayList<>(categories));
+        return courseRepository.findAllByCategoriesIn(categories);
+    }
+
+    @Override
+    public void rating(Course course, int rating) {
+        log.info(String.valueOf(course.getRating()));
+        log.info(String.valueOf(course.getCalculate()));
+        course.setRating(
+                (course.getRating() * course.getCalculate() + rating)
+                / (course.getCalculate() + 1));
+        course.setCalculate(course.getCalculate() + 1);
+    }
+
+    @Override
+    public List<Course> topCourses() {
+        return courseRepository.findAllByOrderByRating();
+    }
+
+    @Override
+    public List<Course> categoriesCourses(Person person) {
+        List<Category> categories = new ArrayList<>();
+        for (Course course:person.getCoursesTaken()){
+            categories.addAll(course.getCategories());
+        }
+        for (Course course:person.getCourseCompleted()){
+            categories.addAll(course.getCategories());
+        }
         return courseRepository.findAllByCategoriesIn(categories);
     }
 }

@@ -12,9 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,8 +32,8 @@ public class CourseController {
         return new ResponseEntity<>(courseService.getCourses(), HttpStatus.OK);
     }
 
-    @PostMapping("/api/{id}")
-    public ResponseEntity<?> createCourse(@PathVariable Long id, @RequestBody CourseDto courseDto) {
+    @PostMapping("/api")
+    public ResponseEntity<?> createCourse(@RequestBody CourseDto courseDto) {
         Course course = new Course();
         course.setTitle(courseDto.getTitle());
         course.setDescription(courseDto.getDescription());
@@ -42,11 +43,13 @@ public class CourseController {
 
         for (String name : courseDto.getCategories()) {
             Category category = categoryService.findByName(name);
-            courseService.addCategoryToCourse(category, course); // TODO: создавать новые категории
+            if(category == null){
+                category = categoryService.saveCategory(new Category(name));
+            }
+            courseService.addCategoryToCourse(category, course);
         }
-
-        Person user = userService.getUser(id);
-        userService.addCourseToUser(course, user);
+        Person user = userService.getUser(isLogged());
+        userService.addCourseCreateToUser(course, user);
         return new ResponseEntity<>("Course created successfully", HttpStatus.OK);
     }
 
@@ -59,5 +62,23 @@ public class CourseController {
     @GetMapping("/api/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable Long id) {
         return ResponseEntity.ok(courseService.getCourse(id));
+    }
+
+
+    @PostMapping("/api/{id}")
+    public ResponseEntity<?> ratingCourse(@PathVariable Long id, @RequestBody int rating){
+        Course course = courseService.getCourse(id);
+        courseService.rating(course, rating);
+        return new ResponseEntity<>("Rated", HttpStatus.OK);
+    }
+
+    public String isLogged(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        log.info(currentPrincipalName);
+        if(!currentPrincipalName.equals("anonymousUser")){
+            return currentPrincipalName;
+        }
+        return "anonymousUser";
     }
 }

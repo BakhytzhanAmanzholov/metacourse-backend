@@ -28,4 +28,6 @@ public class Person {
     private Collection<Course> coursesTaken = new ArrayList<>();
     @OneToMany
     private Collection<Course> coursesCreated = new ArrayList<>();
+    @OneToMany
+    private Collection<Course> courseCompleted = new ArrayList<>();
 }

@@ -23,6 +23,7 @@ public class Course {
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
     private double rating;
+    private int calculate = 0;
     @OneToMany
     private Collection<Module> modules = new ArrayList<>();
 }

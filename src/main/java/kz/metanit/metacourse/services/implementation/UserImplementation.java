@@ -96,8 +96,13 @@ public class UserImplementation implements UserService, UserDetailsService {
     }
 
     @Override
-    public void addCourseToUser(Course course, Person person) {
+    public void addCourseCreateToUser(Course course, Person person) {
         person.getCoursesCreated().add(course);
+    }
+
+    @Override
+    public void addCourseTakenToUser(Course course, Person person) {
+        person.getCoursesTaken().add(course);
     }
 
     @Override
@@ -114,5 +119,11 @@ public class UserImplementation implements UserService, UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         });
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+    }
+
+    @Override
+    public void completeCourse(Course course, Person person) {
+        person.getCoursesTaken().remove(course);
+        person.getCourseCompleted().add(course);
     }
 }

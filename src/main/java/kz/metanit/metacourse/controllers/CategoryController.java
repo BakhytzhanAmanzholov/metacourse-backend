@@ -37,7 +37,6 @@ public class CategoryController {
     @GetMapping("/api")
     public ResponseEntity<Category> getCategoryByName(@RequestBody CategoryDto categoryDto){
         Category category = categoryService.findByName(categoryDto.getName());
-        log.info(category.toString());
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 }
