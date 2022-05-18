@@ -14,19 +14,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @Slf4j
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
     private final CourseService courseService;
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> cabinet(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUser(id));
     }
 
-    @PutMapping("/api/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> edit(@PathVariable Long id, @RequestBody RegistrationDto registrationDto) {
         Person person = userService.getUser(id);
         if (userService.getUser(registrationDto.getEmail()) != null &&
@@ -46,13 +46,13 @@ public class UserController {
         return new ResponseEntity<>("User update successfully", HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok(id);
     }
 
-    @PostMapping("/api/take/{id}")
+    @PostMapping("/take/{id}")
     public ResponseEntity<?> takeCourse(@PathVariable Long id){
         Course course = courseService.getCourse(id);
         Person person = userService.getUser(isLogged());
@@ -60,7 +60,7 @@ public class UserController {
         return new ResponseEntity<>("Course take successfully", HttpStatus.OK);
     }
 
-    @PostMapping("/api/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> completeCourse(@PathVariable Long id){
         Course course = courseService.getCourse(id);
         Person person = userService.getUser(isLogged());

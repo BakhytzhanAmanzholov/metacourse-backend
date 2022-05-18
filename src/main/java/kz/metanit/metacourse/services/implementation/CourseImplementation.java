@@ -1,11 +1,11 @@
 package kz.metanit.metacourse.services.implementation;
 
-import kz.metanit.metacourse.models.Category;
-import kz.metanit.metacourse.models.Course;
+import kz.metanit.metacourse.models.*;
 import kz.metanit.metacourse.models.Module;
-import kz.metanit.metacourse.models.Person;
 import kz.metanit.metacourse.repositories.CourseRepository;
+import kz.metanit.metacourse.repositories.ModuleRepository;
 import kz.metanit.metacourse.services.CourseService;
+import kz.metanit.metacourse.services.ModuleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,7 @@ import java.util.*;
 @Slf4j
 public class CourseImplementation implements CourseService {
     private final CourseRepository courseRepository;
+    private final ModuleService moduleService;
 
     @Override
     public Course saveCourse(Course course) {
@@ -53,12 +54,11 @@ public class CourseImplementation implements CourseService {
     @Override
     public void deleteCourse(Long id) {
         log.info("Delete course by id {}", id);
-        Optional<Course> course = courseRepository.findById(id);
-        try {
-            courseRepository.delete(course.get());
-        } catch (NoSuchElementException e) {
-            throw new IllegalArgumentException(e);
+        Course course = getCourse(id);
+        for(Module module: course.getModules()){
+            moduleService.deleteModule(module.getId());
         }
+        courseRepository.delete(course);
     }
 
     @Override

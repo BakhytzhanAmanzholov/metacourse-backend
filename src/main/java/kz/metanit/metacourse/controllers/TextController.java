@@ -14,14 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/text")
+@RequestMapping("/api/text")
 @Slf4j
 @RequiredArgsConstructor
 public class TextController {
     private final TextService textService;
     private final LessonService lessonService;
 
-    @PostMapping("/api/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> createText(@PathVariable Long id) {
         Text text = new Text();
         textService.saveText(text);
@@ -30,12 +30,17 @@ public class TextController {
         return new ResponseEntity<>("Text created successfully", HttpStatus.OK);
     }
 
-    @PutMapping("/api/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> editText(@PathVariable Long id, @RequestBody TextDto textDto) {
         Text text = new Text();
         text.setText(textDto.getText());
         text.setHeading(textDto.getHeading());
         textService.update(id, text);
         return new ResponseEntity<>("Text edit successfully", HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteText(@PathVariable Long id){
+        textService.deleteText(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 }

@@ -12,14 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/module")
+@RequestMapping("/api/module")
 @Slf4j
 @RequiredArgsConstructor
 public class ModuleController {
     private final ModuleService moduleService;
     private final CourseService courseService;
 
-    @PostMapping("/api/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> createModule(@PathVariable Long id){
         Module module = new Module();
         moduleService.saveModule(module);
@@ -28,7 +28,7 @@ public class ModuleController {
         return new ResponseEntity<>("Module created successfully", HttpStatus.OK);
     }
 
-    @PutMapping("/api/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> editModule(@PathVariable Long id, @RequestBody ModuleDto moduleDto){
         Module module = new Module();
         module.setTitle(moduleDto.getTitle());
@@ -37,8 +37,13 @@ public class ModuleController {
         return new ResponseEntity<>("Module edit successfully", HttpStatus.OK);
     }
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Module> getModule(@PathVariable Long id){
         return ResponseEntity.ok(moduleService.getModule(id));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteModule(@PathVariable Long id){
+        moduleService.deleteModule(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 }

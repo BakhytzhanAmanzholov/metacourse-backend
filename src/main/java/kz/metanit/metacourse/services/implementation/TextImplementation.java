@@ -50,7 +50,6 @@ public class TextImplementation implements TextService {
     public Text update(Long id, Text text) {
         Text textOld = getText(id);
         textOld.setText(text.getText());
-        textOld.setHeading(text.getHeading());
         return textOld;
     }
 }

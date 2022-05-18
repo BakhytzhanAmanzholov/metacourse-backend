@@ -10,4 +10,5 @@ public interface TextRepository extends JpaRepository<Text, Long> {
     Text findByHeading(String heading);
     Optional<Text> findById(Long id);
     List<Text> findAll();
+    void delete(Text text);
 }

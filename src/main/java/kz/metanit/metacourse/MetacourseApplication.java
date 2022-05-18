@@ -57,11 +57,11 @@ public class MetacourseApplication {
             categoryList3.add(category3);
 
 
-            Course course1 = new Course(null, "Programming", "Programming", "4-5 hours",
+            Course course1 = new Course(null, "Programming", "Programming", 4,
                     categoryList1, 0.0, 0, new ArrayList<>());
-            Course course2 = new Course(null, "Language", "Language", "4-5 hours",
+            Course course2 = new Course(null, "Language", "Language", 5,
                     categoryList3, 0.0, 0, new ArrayList<>());
-            Course course3 = new Course(null, "Category", "Category", "4-5 hours",
+            Course course3 = new Course(null, "Category", "Category", 6,
                     categoryList2, 0.0, 0, new ArrayList<>());
 
             courseService.saveCourse(course1);

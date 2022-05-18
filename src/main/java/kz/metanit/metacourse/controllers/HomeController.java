@@ -90,8 +90,8 @@ public class HomeController {
 
 @Data
 class Recommendations{
-    private List<Course> recommendationsCourses = new ArrayList<>();
-    private List<Course> categoriesCourses = new ArrayList<>();
+    private List<Course> recommendationsCourses ;
+    private List<Course> categoriesCourses;
 
     public Recommendations(List<Course> recommendationsCourses, List<Course> categoriesCourses) {
         this.recommendationsCourses = recommendationsCourses;

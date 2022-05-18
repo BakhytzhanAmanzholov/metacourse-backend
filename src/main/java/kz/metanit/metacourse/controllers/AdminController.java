@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 @Slf4j
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService userService;
     private final CourseService courseService;
 
-    @GetMapping("/api/users")
+    @GetMapping("/users")
     public ResponseEntity<?> listOfUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/api/courses")
+    @GetMapping("/courses")
     public ResponseEntity<?> listOfCourses() {
         return new ResponseEntity<>(courseService.getCourses(), HttpStatus.OK);
     }

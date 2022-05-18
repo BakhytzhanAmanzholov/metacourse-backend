@@ -19,7 +19,7 @@ public class Course {
     private Long id;
     private String title;
     private String description;
-    private String duration;
+    private int duration = 1;
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
     private double rating;

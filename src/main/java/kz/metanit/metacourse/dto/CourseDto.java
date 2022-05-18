@@ -8,6 +8,6 @@ import java.util.List;
 public class CourseDto {
     private String title;
     private String description;
-    private String duration;
+    private int duration;
     private List<String> categories;
 }

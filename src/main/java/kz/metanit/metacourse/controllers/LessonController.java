@@ -14,14 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/lesson")
+@RequestMapping("/api/lesson")
 @Slf4j
 @RequiredArgsConstructor
 public class LessonController {
     private final LessonService lessonService;
     private final ModuleService moduleService;
 
-    @PostMapping("/api/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> createLesson(@PathVariable Long id) {
         Lesson lesson = new Lesson();
         lessonService.saveLesson(lesson);
@@ -30,7 +30,7 @@ public class LessonController {
         return new ResponseEntity<>("Lesson created successfully", HttpStatus.OK);
     }
 
-    @PutMapping("/api/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> editLesson(@PathVariable Long id, @RequestBody LessonDto lessonDto) {
         Lesson lesson = new Lesson();
         lesson.setTitle(lessonDto.getTitle());
@@ -39,8 +39,13 @@ public class LessonController {
         return new ResponseEntity<>("Lesson edit successfully", HttpStatus.OK);
     }
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Lesson> getLesson(@PathVariable Long id) {
         return ResponseEntity.ok(lessonService.getLesson(id));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteLesson(@PathVariable Long id){
+        lessonService.deleteLesson(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 }

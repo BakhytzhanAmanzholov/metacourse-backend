@@ -2,7 +2,9 @@ package kz.metanit.metacourse.services.implementation;
 
 import kz.metanit.metacourse.models.Lesson;
 import kz.metanit.metacourse.models.Module;
+import kz.metanit.metacourse.repositories.LessonRepository;
 import kz.metanit.metacourse.repositories.ModuleRepository;
+import kz.metanit.metacourse.services.LessonService;
 import kz.metanit.metacourse.services.ModuleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @Slf4j
 public class ModuleImplementation implements ModuleService {
     private final ModuleRepository moduleRepository;
+    private final LessonService lessonService;
 
     @Override
     public Module saveModule(Module module) {
@@ -48,6 +51,9 @@ public class ModuleImplementation implements ModuleService {
     public void deleteModule(Long id) {
         log.info("Delete module by id {}", id);
         Module module = getModule(id);
+        for(Lesson lesson: module.getLessons()){
+            lessonService.deleteLesson(lesson.getId());
+        }
         moduleRepository.delete(module);
     }
 

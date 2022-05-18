@@ -10,18 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 @Slf4j
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @GetMapping("/api/list")
+    @GetMapping("/list")
     public ResponseEntity<?> index(){
         return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.OK);
     }
 
-    @PostMapping("/api")
+    @PostMapping("/")
     public ResponseEntity<?> createCategory(@RequestBody CategoryDto categoryDto){
         Category category = new Category();
         category.setName(categoryDto.getName());
@@ -29,12 +29,12 @@ public class CategoryController {
         return new ResponseEntity<>("Category created successfully", HttpStatus.OK);
     }
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Category> getCategory(@PathVariable Long id){
         return new ResponseEntity<>(categoryService.getCategory(id), HttpStatus.OK);
     }
 
-    @GetMapping("/api")
+    @GetMapping("/")
     public ResponseEntity<Category> getCategoryByName(@RequestBody CategoryDto categoryDto){
         Category category = categoryService.findByName(categoryDto.getName());
         return new ResponseEntity<>(category, HttpStatus.OK);

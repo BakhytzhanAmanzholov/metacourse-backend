@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api/course")
 @Slf4j
 @RequiredArgsConstructor
 public class CourseController {
@@ -27,12 +27,12 @@ public class CourseController {
     private final UserService userService;
     private final CategoryService categoryService;
 
-    @GetMapping("/api")
+    @GetMapping("/")
     public ResponseEntity<?> getAllCourses() {
         return new ResponseEntity<>(courseService.getCourses(), HttpStatus.OK);
     }
 
-    @PostMapping("/api")
+    @PostMapping("/")
     public ResponseEntity<?> createCourse(@RequestBody CourseDto courseDto) {
         Course course = new Course();
         course.setTitle(courseDto.getTitle());
@@ -53,19 +53,19 @@ public class CourseController {
         return new ResponseEntity<>("Course created successfully", HttpStatus.OK);
     }
 
-    @GetMapping("/api/categories")
+    @GetMapping("/categories")
     public ResponseEntity<?> getAllCourseByCategory(@RequestBody CategoryListDto categoryListDto) {
         List<Category> categoryList = categoryService.findByNames(categoryListDto.getCategories());
         return new ResponseEntity<>(courseService.findAllByCategories(categoryList), HttpStatus.OK);
     }
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable Long id) {
         return ResponseEntity.ok(courseService.getCourse(id));
     }
 
 
-    @PostMapping("/api/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> ratingCourse(@PathVariable Long id, @RequestBody int rating){
         Course course = courseService.getCourse(id);
         courseService.rating(course, rating);
@@ -80,5 +80,11 @@ public class CourseController {
             return currentPrincipalName;
         }
         return "anonymousUser";
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCourse(@PathVariable Long id){
+        courseService.deleteCourse(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 }
