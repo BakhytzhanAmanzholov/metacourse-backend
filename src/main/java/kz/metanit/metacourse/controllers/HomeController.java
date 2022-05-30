@@ -38,18 +38,14 @@ public class HomeController {
 
     @PostMapping("/api/signin")
     public ResponseEntity<PersonToken> authenticateUser(@RequestBody LoginDto loginDto) {
-        log.info("hello");
         Person person = userService.getUser(loginDto.getEmail());
         if (person == null) {
-            log.info("hello");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getEmail(), loginDto.getPassword()));
-        log.info("hello");
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenProvider.generateToken(authentication);
-        log.info("hello");
         PersonToken personToken = new PersonToken(new JWTAuthResponse(token), person);
         return ResponseEntity.ok(personToken);
     }
