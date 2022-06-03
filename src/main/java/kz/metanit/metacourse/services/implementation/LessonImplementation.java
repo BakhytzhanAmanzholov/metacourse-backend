@@ -1,7 +1,6 @@
 package kz.metanit.metacourse.services.implementation;
 
 import kz.metanit.metacourse.models.Lesson;
-import kz.metanit.metacourse.models.Module;
 import kz.metanit.metacourse.models.Text;
 import kz.metanit.metacourse.repositories.LessonRepository;
 import kz.metanit.metacourse.repositories.TextRepository;
@@ -11,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,9 +1,10 @@
 package kz.metanit.metacourse.services.implementation;
 
-import kz.metanit.metacourse.models.*;
+import kz.metanit.metacourse.models.Category;
+import kz.metanit.metacourse.models.Course;
 import kz.metanit.metacourse.models.Module;
+import kz.metanit.metacourse.models.Person;
 import kz.metanit.metacourse.repositories.CourseRepository;
-import kz.metanit.metacourse.repositories.ModuleRepository;
 import kz.metanit.metacourse.services.CourseService;
 import kz.metanit.metacourse.services.ModuleService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -2,7 +2,6 @@ package kz.metanit.metacourse.services.implementation;
 
 import kz.metanit.metacourse.models.Lesson;
 import kz.metanit.metacourse.models.Module;
-import kz.metanit.metacourse.repositories.LessonRepository;
 import kz.metanit.metacourse.repositories.ModuleRepository;
 import kz.metanit.metacourse.services.LessonService;
 import kz.metanit.metacourse.services.ModuleService;

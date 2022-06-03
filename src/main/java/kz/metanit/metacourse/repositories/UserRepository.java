@@ -1,6 +1,5 @@
 package kz.metanit.metacourse.repositories;
 
-import kz.metanit.metacourse.models.Course;
 import kz.metanit.metacourse.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 

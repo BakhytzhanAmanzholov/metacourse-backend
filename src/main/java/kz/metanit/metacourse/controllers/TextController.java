@@ -1,9 +1,7 @@
 package kz.metanit.metacourse.controllers;
 
-import kz.metanit.metacourse.dto.LessonDto;
 import kz.metanit.metacourse.dto.TextDto;
 import kz.metanit.metacourse.models.Lesson;
-import kz.metanit.metacourse.models.Module;
 import kz.metanit.metacourse.models.Text;
 import kz.metanit.metacourse.services.LessonService;
 import kz.metanit.metacourse.services.TextService;
